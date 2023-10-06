@@ -49,8 +49,26 @@
         <label for="fechaNacimiento">Fecha de Nacimiento:</label>
         <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br><br>
 
-        <label for="peso">Peso (kg):</label>
+        <label for="peso">Peso (lb):</label>
         <input type="number" id="peso" name="peso" step="0.01" required><br><br>
+        
+        <label for="estatura">Estatura (mts):</label>
+        <input type="number" id="estatura" name="estatura" step="0.01" required><br><br>
+
+        <label for="tipoSangre">Tipo de Sangre:</label>
+        <input type="text" id="tipoSangre" name="tipoSangre" required><br><br>
+
+        <label for="condicionMedica">Condición Médica:</label>
+        <input type="text" id="condicionMedica" name="condicionMedica" required><br><br>
+
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" required><br><br>
+
+        <label for="distrito">Distrito:</label>
+        <input type="text" id="distrito" name="distrito" required><br><br>
+
+        <label for="corregimiento">Corregimiento:</label>
+        <input type="text" id="corregimiento" name=corregimiento required><br><br>
 
         <input type="submit" value="Enviar">
     </form>
