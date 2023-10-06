@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="./css/Styles.css">
+    <title>Proyecto DS7 2</title>
 </head>
 <body>
     <h1>Proyecto #1 Desarrollo 7</h1>
