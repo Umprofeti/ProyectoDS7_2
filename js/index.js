@@ -33,10 +33,10 @@ var rbCasadaNo = document.getElementById("casadaNo");
     
 */
 const onlyNumbers = (htmlInput) => {
-    let inputValue = htmlInput.value;
-    let sanitizedValue = inputValue.replace(/[^0-9]/g, '');//este deberia evitar que characteres sean introducidos
-    if (inputValue !== sanitizedValue) {
-        htmlInput.value = sanitizedValue;
+    let input = htmlInput.value
+    let regex = /[0-9+]+/u;
+    if(!regex.test(input)){
+        htmlInput.value = "";
     }
 }
 
@@ -70,3 +70,29 @@ const onlyNumbersAndTwoDecimal = (htmlInput) => {
     htmlInput.value = parts.join('.');
 }
 
+/* 
+    * Validacion de los campos
+*/
+
+inputTomo.addEventListener('input', () => {
+    onlyNumbers(inputTomo)
+})
+inputAsiento.addEventListener('input', ()=> {
+    onlyNumbers(inputAsiento)
+})
+
+inputNombre1.addEventListener('input', ()=> {
+    onlyChar(inputNombre1);
+})
+
+inputNombre2.addEventListener('input', ()=> {
+    onlyChar(inputNombre2);
+})
+
+inputApellido1.addEventListener('input', ()=> {
+    onlyChar(inputApellido1);
+})
+
+inputApellido2.addEventListener('input', ()=> {
+    onlyChar(inputApellido2);
+})
