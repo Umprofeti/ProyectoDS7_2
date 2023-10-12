@@ -1,10 +1,35 @@
 'use strict'
 
 /* 
+    * Campos del formulario
+*/
+
+var inputTomo =  document.getElementById("tomo");
+var inputAsiento = document.getElementById("asiento");
+var inputNombre1 = document.getElementById("nombre1");
+var inputNombre2 = document.getElementById("nombre2");
+var inputApellido1 = document.getElementById("apellido1");
+var inputApellido2 = document.getElementById("apellido2");
+var inputACasada = document.getElementById("apellidoCasada");
+var inputPeso = document.getElementById("peso");
+var inputEstatura = document.getElementById("estatura");
+var inputCMedica = document.getElementById("CMedica");
+var inputComunidad = document.getElementById("Comunidad");
+var inputCalle = document.getElementById("Calle");
+var inputCasa = document.getElementById("Casa"); 
+
+/* Radio Buttons */
+
+var rbGeneroM = document.getElementById("generoM");
+var rbGeneroF = document.getElementById("generoF");
+var rbCasadaSi = document.getElementById("casadaSi");
+var rbCasadaNo = document.getElementById("casadaNo");
+/* 
     @param htmlInput : HTML_ELEMENT
 */
 
-/* Funcion que valida solamente existan números dentro del campo
+/*
+ Funcion que valida solamente existan números dentro del campo
     
 */
 const onlyNumbers = (htmlInput) => {

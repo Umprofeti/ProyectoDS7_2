@@ -38,13 +38,14 @@
                     <option>13</option>
                     <option>PE</option>
                     <option>E</option>
+                    <option>AV</option>
                 </select><br><br>
 
                 <label for="tomo">Tomo:</label>
                 <input type="text" id="tomo" name="tomo" required maxlength="3"><br><br>
 
                 <label for="asiento">Asiento:</label>
-                <input type="text" id="asiento" name="asiento" required maxlength="4"><br><br>
+                <input type="text" id="asiento" name="asiento" required maxlength="5"><br><br>
             </div>
             <div class ="wrapper">
                 <label for="nombre1">Nombre 1:</label>
