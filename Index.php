@@ -23,14 +23,28 @@
             <div class="wrapper">
                 <label for="prefijo">Prefijo:</label>
                 <select id="prefijo" name="prefijo" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
                     <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>PE</option>
+                    <option>E</option>
                 </select><br><br>
 
                 <label for="tomo">Tomo:</label>
-                <input type="text" id="tomo" name="tomo" required><br><br>
+                <input type="text" id="tomo" name="tomo" required maxlength="3"><br><br>
 
                 <label for="asiento">Asiento:</label>
-                <input type="text" id="asiento" name="asiento" required><br><br>
+                <input type="text" id="asiento" name="asiento" required maxlength="4"><br><br>
             </div>
             <div class ="wrapper">
                 <label for="nombre1">Nombre 1:</label>
