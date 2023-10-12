@@ -1,0 +1,134 @@
+:root{
+    --txt-primary: 'Lato', sans-serif;
+    --color-primary: #fff;
+    --color-secundary: #000;
+    --bg-gradient-firts:  #543ab7;
+    --bg-gradient-secundary: #00acc1;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(40deg, #543ab7, #00acc1);
+    background-size: 400% 400%;
+    -webkit-animation: Animation 10s ease infinite;
+    -moz-animation: Animation 10s ease infinite;
+    animation: Animation 10s ease infinite;
+    height: 100%;
+    padding: 30px;
+    gap: 40px;
+    font-family: var(--txt-primary);
+}
+.optionsSenders{
+    width: 60%;
+    padding: 10px 20px 10px 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+}
+
+.buttonSender{
+    width: 34%;
+    border-radius: 20px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.10);
+    border: none;
+    font-family: var(--txt-primary);
+    font-weight: bold;
+    background:var(--color-primary);
+    padding: 10px 5px 10px 5px ;
+}
+
+form{
+    padding: 40px 20px 40px 20px;
+    width: 60%;
+    background: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.10);
+    border-radius: 20px;
+} 
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.label-radioButton{
+ display: flex;
+ flex-direction: row;   
+}
+input {
+    border: 0;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.20);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+input[type="date"] {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+input[type="submit"]{
+    width: 100%;
+}
+
+/* Animaciones */
+@-webkit-keyframes Animation {
+    0% {
+        background-position: 50% 0%
+    }
+
+    50% {
+        background-position: 50% 100%
+    }
+
+    100% {
+        background-position: 50% 0%
+    }
+}
+
+@-moz-keyframes Animation {
+    0% {
+        background-position: 50% 0%
+    }
+
+    50% {
+        background-position: 50% 100%
+    }
+
+    100% {
+        background-position: 50% 0%
+    }
+}
+
+@keyframes Animation {
+    0% {
+        background-position: 50% 0%
+    }
+
+    50% {
+        background-position: 50% 100%
+    }
+
+    100% {
+        background-position: 50% 0%
+    }
+}
