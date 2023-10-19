@@ -5,72 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./js/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="./css/Styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <title>Proyecto DS7 2</title>
 </head>
 <body>
-    <h1>Proyecto #1 Desarrollo 7</h1>
-    <form action="procesar_formulario.php" method="post">
+    <header>
+        <h1>Proyecto #1 Desarrollo 7</h1>
+    </header>
+    <main>
+        <div class="optionsSenders">
+            <button class="buttonSender">Crear</button>
+            <button class="buttonSender">Actualizar</button>
+            <button class="buttonSender">Salir</button>
+        </div>
+        <form action="procesar_formulario.php" method="post">
+            <div class="wrapper">
+                <label for="prefijo">Prefijo:</label>
+                <select id="prefijo" name="prefijo" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>PE</option>
+                    <option>E</option>
+                    <option>AV</option>
+                </select><br><br>
 
-        <label for="prefijo">Prefijo:</label>
-        <input type="text" id="prefijo" name="prefijo" required><br><br>
+                <label for="tomo">Tomo:</label>
+                <input type="text" id="tomo" name="tomo" required maxlength="3"><br><br>
 
-        <label for="tomo">Tomo:</label>
-        <input type="text" id="tomo" name="tomo" required><br><br>
+                <label for="asiento">Asiento:</label>
+                <input type="text" id="asiento" name="asiento" required maxlength="5"><br><br>
+            </div>
+            <div class ="wrapper">
+                <label for="nombre1">Nombre 1:</label>
+                <input type="text" id="nombre1" name="nombre1" required><br><br>
 
-        <label for="asiento">Asiento:</label>
-        <input type="text" id="asiento" name="asiento" required><br><br>
+                <label for="nombre2">Nombre 2:</label>
+                <input type="text" id="nombre2" name="nombre2"><br><br>
+            </div>
+            <div class="wrapper">
+                <label for="apellido1">Apellido 1:</label>
+                <input type="text" id="apellido1" name="apellido1" required><br><br>
+                <label for="apellido2">Apellido 2:</label>
+                <input type="text" id="apellido2" name="apellido2"><br><br>
+            </div>
+            <div class="wrapper">
+                <div class="wrapper">
+                    <label>Género:</label>
+                    <div class="label-radioButton">
+                        <label for="generoM">M</label>
+                        <input type="radio" id="generoM" name="genero" value="M">
+                    </div>
+                    <div class="label-radioButton">
+                        <label for="generoF">F</label>
+                        <input type="radio" id="generoF" name="genero" value="F">
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <label>¿Apellido de Casada?:</label>
+                       <div class="label-radioButton">
+                            <label for="casadaSi">Sí</label>
+                            <input type="radio" id="casadaSi" name="casada" value="Si">
+                       </div>
+                       <div class="label-radioButton">
+                            <label for="casadaNo">No</label>
+                            <input type="radio" id="casadaNo" name="casada" value="No">
+                       </div> 
+                </div>
+            </div>
+            <label for="apellidoCasada">Apellido de Casada:</label>
+            <input type="text" id="apellidoCasada" name="apellidoCasada"><br><br>
 
-        <label for="nombre1">Nombre 1:</label>
-        <input type="text" id="nombre1" name="nombre1" required><br><br>
+            <div class="wrapper">
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br><br>
 
-        <label for="nombre2">Nombre 2:</label>
-        <input type="text" id="nombre2" name="nombre2"><br><br>
+                <label for="peso">Peso (lbs):</label>
+                <input type="number" id="peso" name="peso" step="0.01" required><br><br>
+            </div>
+            <div class="wrapper">
+                <label>Estatura (mts):</label>
+                <input type="number" id="estatura" name="Estatura" step="0.01" required/>
 
-        <label for="apellido1">Apellido 1:</label>
-        <input type="text" id="apellido1" name="apellido1" required><br><br>
-        <label for="apellido2">Apellido 2:</label>
-        <input type="text" id="apellido2" name="apellido2"><br><br>
+                <label>Tipo de Sangre: </label>
+                <select name ="TipoSangre" id="TipoSangre">
+                    <option value="0">A+</option>
+                    <option value="1">A-</option>
+                    <option value="2">O+</option>
+                    <option value="3">O-</option>
+                    <option value="4">B+</option>
+                    <option value="5">B-</option>
+                    <option value="6">AB+</option>
+                    <option value="7">AB-</option>
+                </select>
+            </div>
+            <label for="CMedica">Condición Médica:</label>
+            <input type="text" name="CMedica" id="CMedica"/>
 
-        <label>Género:</label><br>
-        <input type="radio" id="generoM" name="genero" value="M">
-        <label for="generoM">Masculino</label><br>
-        <input type="radio" id="generoF" name="genero" value="F">
-        <label for="generoF">Femenino</label><br><br>
+            <div class="wrapper">
+                <!-- Los datos procedentes de esto vendrán desde una base de datos en donde se encontrarán todos los países -->
+                <label for="Pais">País:</label>
+                <select name="Pais" id="Pais">
+                    <option value="0">Panamá</option>
+                </select>
+                <label for ="Distrito">Distrito:</label>
+                <select name="Distrito" id="Distrito">
+                    <option value="0">La Chorrera</option>
+                </select>
+                <label for="Corregimiento">Corregimiento:</label>
+                <select name="Corregimiento" id="Corregimiento">
+                    <option value ="0">
+                        Barrio Balboa
+                    </option>
+                </select>
+            </div>
+            <div class="wrapper">
+                <label for="Comunidad">Comunidad:</label>
+                <input type="text" id="Comunidad" />
+                <label for="Calle">Calle:</label>
+                <input type="text" name="Calle" id="Calle">
+                <label for="Casa">Casa:</label>
+                <input type="text" name="Casa" id="Casa">
+            </div>
+            <input type="submit" value="Enviar">
+        </form>
+    </main>
+    <footer>
 
-        <label>¿Apellido de Casada?:</label><br>
-        <input type="radio" id="casadaSi" name="casada" value="Si">
-        <label for="casadaSi">Sí</label><br>
-        <input type="radio" id="casadaNo" name="casada" value="No">
-        <label for="casadaNo">No</label><br><br>
-
-        <label for="apellidoCasada">Apellido de Casada:</label>
-        <input type="text" id="apellidoCasada" name="apellidoCasada"><br><br>
-
-        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br><br>
-
-        <label for="peso">Peso (lb):</label>
-        <input type="number" id="peso" name="peso" step="0.01" required><br><br>
-        
-        <label for="estatura">Estatura (mts):</label>
-        <input type="number" id="estatura" name="estatura" step="0.01" required><br><br>
-
-        <label for="tipoSangre">Tipo de Sangre:</label>
-        <input type="text" id="tipoSangre" name="tipoSangre" required><br><br>
-
-        <label for="condicionMedica">Condición Médica:</label>
-        <input type="text" id="condicionMedica" name="condicionMedica" required><br><br>
-
-        <label for="pais">País:</label>
-        <input type="text" id="pais" name="pais" required><br><br>
-
-        <label for="distrito">Distrito:</label>
-        <input type="text" id="distrito" name="distrito" required><br><br>
-
-        <label for="corregimiento">Corregimiento:</label>
-        <input type="text" id="corregimiento" name=corregimiento required><br><br>
-
-        <input type="submit" value="Enviar">
-    </form>
+    </footer>
 </body>
+<script src="./js/index.js"></script>
 </html>
