@@ -44,7 +44,8 @@ const onlyNumbers = (htmlInput) => {
 const onlyChar = (htmlInput) => {
     let regex = /^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]+$/u;
     if (!regex.test(htmlInput.value)) {
-        htmlInput.value = "";
+        // Ajusta la funcion de modo que si el valor no coincide con la expresión regular, elimina los caracteres no válidos pero no limpia el campo
+        htmlInput.value = htmlInput.value.replace(/[^A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]+/ug, '');;
     }
 }
 
@@ -69,6 +70,57 @@ const onlyNumbersAndTwoDecimal = (htmlInput) => {
     // Vuelve a unir las partes y establece el valor formateado en el campo de entrada
     htmlInput.value = parts.join('.');
 }
+
+const apellidoCasada = document.getElementById('apellidoCasada');
+const generoF = document.getElementById('generoF');
+const generoM = document.getElementById('generoM');
+const casadaSi = document.getElementById('casadaSi');
+const casadaNo = document.getElementById('casadaNo');
+
+// Deshabilita el campo "Apellido de Casada" y los radio buttons por defecto
+apellidoCasada.disabled = true;
+casadaSi.disabled = true;
+casadaNo.disabled = true;
+
+// Agrega eventos de cambio a los radio buttons de género
+generoF.addEventListener('change', function() {
+    if (generoF.checked) {
+        // Si el género es "F", habilita el campo "Apellido de Casada" y los radio buttons
+        apellidoCasada.disabled = false;
+        casadaSi.disabled = false;
+        casadaNo.disabled = false;
+    } else {
+        // De lo contrario, deshabilita el campo "Apellido de Casada" y los radio buttons
+        apellidoCasada.disabled = true;
+        casadaSi.disabled = true;
+        casadaNo.disabled = true;
+        apellidoCasada.value = "";
+    }
+});
+
+generoM.addEventListener('change', function() {
+    if (generoM.checked) {
+        // Si el género es "M", deshabilita el campo "Apellido de Casada", los radio buttons y limpia la seleccion
+        apellidoCasada.disabled = true;
+        casadaSi.disabled = true;
+        casadaNo.disabled = true;
+        apellidoCasada.value = "";
+        casadaSi.checked = false;
+        casadaNo.checked = false;
+    }
+});
+
+const fechaNacimientoInput = document.getElementById('fechaNacimiento');
+
+fechaNacimientoInput.addEventListener('change', function () {
+    const selectedDate = new Date(fechaNacimientoInput.value);
+
+    if (isNaN(selectedDate.getTime())) {
+        // La fecha ingresada no es válida
+        alert('La fecha de nacimiento ingresada no es válida. Por favor, ingrese una fecha válida.');
+        fechaNacimientoInput.value = ''; // Limpia el campo
+    }
+});
 
 /* 
     * Validacion de los campos
@@ -95,4 +147,10 @@ inputApellido1.addEventListener('input', ()=> {
 
 inputApellido2.addEventListener('input', ()=> {
     onlyChar(inputApellido2);
+})
+apellidoCasada.addEventListener('input', ()=> {
+    onlyChar(apellidoCasada);
+})
+inputCMedica.addEventListener('input', ()=> {
+    onlyChar(inputCMedica);
 })

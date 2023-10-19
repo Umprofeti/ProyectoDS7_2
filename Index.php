@@ -7,12 +7,8 @@
     <link rel="stylesheet" href="./css/Styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <title>Proyecto DS7 2</title>
 </head>
 <body>
-    <header>
-        <h1>Proyecto #1 Desarrollo 7</h1>
-    </header>
     <main>
         <div class="optionsSenders">
             <button class="buttonSender">Crear</button>
@@ -92,11 +88,11 @@
                 <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br><br>
 
                 <label for="peso">Peso (lbs):</label>
-                <input type="number" id="peso" name="peso" step="0.01" required><br><br>
+                <input type="number" id="peso" name="peso" step="0.01" min="5" required><br><br>
             </div>
             <div class="wrapper">
                 <label>Estatura (mts):</label>
-                <input type="number" id="estatura" name="Estatura" step="0.01" required/>
+                <input type="number" id="estatura" name="Estatura" step="0.01" min="1" max="2.24" required/>
 
                 <label>Tipo de Sangre: </label>
                 <select name ="TipoSangre" id="TipoSangre">
@@ -119,15 +115,17 @@
                 <select name="Pais" id="Pais">
                     <option value="0">Panamá</option>
                 </select>
+                <label for="Provincia">Provincia:</label>
+                <select name="Provincia" id="Pais">
+                    <option value="0">Panamá</option>
+                </select>
                 <label for ="Distrito">Distrito:</label>
                 <select name="Distrito" id="Distrito">
                     <option value="0">La Chorrera</option>
                 </select>
                 <label for="Corregimiento">Corregimiento:</label>
                 <select name="Corregimiento" id="Corregimiento">
-                    <option value ="0">
-                        Barrio Balboa
-                    </option>
+                    <option value ="0">Barrio Balboa</option>
                 </select>
             </div>
             <div class="wrapper">
