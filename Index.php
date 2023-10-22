@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
+
 <body>
     <main>
         <div class="optionsSenders">
@@ -32,8 +34,8 @@
                     <option>11</option>
                     <option>12</option>
                     <option>13</option>
-                    <option>PE</option>
                     <option>E</option>
+                    <option>PE</option>
                     <option>AV</option>
                 </select><br><br>
 
@@ -43,7 +45,7 @@
                 <label for="asiento">Asiento:</label>
                 <input type="text" id="asiento" name="asiento" required maxlength="5"><br><br>
             </div>
-            <div class ="wrapper">
+            <div class="wrapper">
                 <label for="nombre1">Nombre 1:</label>
                 <input type="text" id="nombre1" name="nombre1" required><br><br>
 
@@ -69,15 +71,24 @@
                     </div>
                 </div>
                 <div class="wrapper">
+                        <label>Estado civil:</label>
+                        <select id="scivil" name="scivil" required>
+                    <option>Soltero(a)</option>
+                    <option>Casado(a)</option>
+                    <option>Divorciado(a)</option>
+                    <option>Viudo(a)</option>
+                    </select>
+                    </div>
+                <div class="wrapper">
                     <label>¿Apellido de Casada?:</label>
-                       <div class="label-radioButton">
-                            <label for="casadaSi">Sí</label>
-                            <input type="radio" id="casadaSi" name="casada" value="Si">
-                       </div>
-                       <div class="label-radioButton">
-                            <label for="casadaNo">No</label>
-                            <input type="radio" id="casadaNo" name="casada" value="No">
-                       </div> 
+                    <div class="label-radioButton">
+                        <label for="casadaSi">Sí</label>
+                        <input type="radio" id="casadaSi" name="casada" value="Si">
+                    </div>
+                    <div class="label-radioButton">
+                        <label for="casadaNo">No</label>
+                        <input type="radio" id="casadaNo" name="casada" value="No">
+                    </div>
                 </div>
             </div>
             <label for="apellidoCasada">Apellido de Casada:</label>
@@ -88,14 +99,15 @@
                 <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br><br>
 
                 <label for="peso">Peso (lbs):</label>
-                <input type="number" id="peso" name="peso" step="0.01" min="5" required><br><br>
+                <input type="number" id="peso" name="peso" step="0.01" min="5" placeholder="120lbs" required><br><br>
             </div>
             <div class="wrapper">
                 <label>Estatura (mts):</label>
-                <input type="number" id="estatura" name="Estatura" step="0.01" min="1" max="2.24" required/>
+                <input type="number" id="estatura" name="Estatura" step="0.01" min="1" max="2.24" placeholder="1.5"
+                    required />
 
                 <label>Tipo de Sangre: </label>
-                <select name ="TipoSangre" id="TipoSangre">
+                <select name="TipoSangre" id="TipoSangre">
                     <option value="0">A+</option>
                     <option value="1">A-</option>
                     <option value="2">O+</option>
@@ -107,7 +119,7 @@
                 </select>
             </div>
             <label for="CMedica">Condición Médica:</label>
-            <input type="text" name="CMedica" id="CMedica"/>
+            <input type="text" name="CMedica" id="CMedica" />
 
             <div class="wrapper">
                 <!-- Los datos procedentes de esto vendrán desde una base de datos en donde se encontrarán todos los países -->
@@ -119,13 +131,13 @@
                 <select name="Provincia" id="Pais">
                     <option value="0">Panamá</option>
                 </select>
-                <label for ="Distrito">Distrito:</label>
+                <label for="Distrito">Distrito:</label>
                 <select name="Distrito" id="Distrito">
                     <option value="0">La Chorrera</option>
                 </select>
                 <label for="Corregimiento">Corregimiento:</label>
                 <select name="Corregimiento" id="Corregimiento">
-                    <option value ="0">Barrio Balboa</option>
+                    <option value="0">Barrio Balboa</option>
                 </select>
             </div>
             <div class="wrapper">
@@ -144,4 +156,5 @@
     </footer>
 </body>
 <script src="./js/index.js"></script>
+
 </html>

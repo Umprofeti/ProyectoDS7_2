@@ -17,7 +17,7 @@ var inputCMedica = document.getElementById("CMedica");
 var inputComunidad = document.getElementById("Comunidad");
 var inputCalle = document.getElementById("Calle");
 var inputCasa = document.getElementById("Casa"); 
-
+var scivil=document.getElementById("scivil");
 /* Radio Buttons */
 
 var rbGeneroM = document.getElementById("generoM");
@@ -48,6 +48,11 @@ const onlyChar = (htmlInput) => {
         htmlInput.value = htmlInput.value.replace(/[^A-Za-záéíóúÁÉÍÓÚüÜñÑ\s]+/ug, '');;
     }
 }
+
+const onlyNumbersAndChar = (htmlInput) => {
+    htmlInput.value = htmlInput.value.replace(/[^A-Za-z0-9]+/g, '');
+}
+
 
 const onlyNumbersAndTwoDecimal = (htmlInput) => {
     let inputValue = htmlInput.value;
@@ -98,6 +103,14 @@ generoF.addEventListener('change', function() {
     }
 });
 
+//Si el campo apellido casada es "No" desabilita el campo de "Apellido de casada".
+casadaNo.addEventListener('click', () => {
+    apellidoCasada.disabled = true;
+})
+casadaSi.addEventListener('click', () => {
+    apellidoCasada.disabled = false;
+})
+
 generoM.addEventListener('change', function() {
     if (generoM.checked) {
         // Si el género es "M", deshabilita el campo "Apellido de Casada", los radio buttons y limpia la seleccion
@@ -109,6 +122,7 @@ generoM.addEventListener('change', function() {
         casadaNo.checked = false;
     }
 });
+
 
 const fechaNacimientoInput = document.getElementById('fechaNacimiento');
 
@@ -153,4 +167,13 @@ apellidoCasada.addEventListener('input', ()=> {
 })
 inputCMedica.addEventListener('input', ()=> {
     onlyChar(inputCMedica);
+})
+inputComunidad.addEventListener('input',()=>{
+    onlyNumbersAndChar(inputComunidad);
+})
+inputCalle.addEventListener('input',()=>{
+    onlyNumbersAndChar(inputCalle);
+})
+inputCasa.addEventListener('input',()=>{
+    onlyNumbersAndChar(inputCasa);
 })
