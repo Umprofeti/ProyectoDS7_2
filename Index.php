@@ -17,7 +17,7 @@
             <button class="buttonSender">Actualizar</button>
             <button class="buttonSender">Salir</button>
         </div>
-        <form action="procesar_formulario.php" method="post">
+        <form action="" method="">
             <div class="wrapper">
                 <label for="prefijo">Prefijo:</label>
                 <select id="prefijo" name="prefijo" required>
@@ -125,19 +125,15 @@
                 <!-- Los datos procedentes de esto vendrán desde una base de datos en donde se encontrarán todos los países -->
                 <label for="Pais">País:</label>
                 <select name="Pais" id="Pais">
-                    <option value="0">Panamá</option>
                 </select>
                 <label for="Provincia">Provincia:</label>
-                <select name="Provincia" id="Pais">
-                    <option value="0">Panamá</option>
+                <select name="Provincia" id="Provincia">
                 </select>
                 <label for="Distrito">Distrito:</label>
                 <select name="Distrito" id="Distrito">
-                    <option value="0">La Chorrera</option>
                 </select>
                 <label for="Corregimiento">Corregimiento:</label>
                 <select name="Corregimiento" id="Corregimiento">
-                    <option value="0">Barrio Balboa</option>
                 </select>
             </div>
             <div class="wrapper">

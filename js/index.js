@@ -18,6 +18,14 @@ var inputComunidad = document.getElementById("Comunidad");
 var inputCalle = document.getElementById("Calle");
 var inputCasa = document.getElementById("Casa"); 
 var scivil=document.getElementById("scivil");
+
+/*
+ * Select Inputs 
+ */
+var selectPaises = document.getElementById("Pais");
+var selectProvincia = document.getElementById("Provincia");
+var selectDistrito = document.getElementById("Distrito");
+var selectCorregimiento = document.getElementById("Corregimiento");
 /* Radio Buttons */
 
 var rbGeneroM = document.getElementById("generoM");
@@ -176,4 +184,90 @@ inputCalle.addEventListener('input',()=>{
 })
 inputCasa.addEventListener('input',()=>{
     onlyNumbersAndChar(inputCasa);
+})
+
+/*
+    * Función para el Llenado del select de países
+*/
+
+const llenarPaises = () => {
+    $.ajax({
+        type: "GET",
+        url: "queryPaises.php",
+                success: (resp) => {
+                    let output = JSON.parse(resp)
+                    output.map(({codigo, pais}) => {
+                        selectPaises.innerHTML += `<option value="${codigo}">${pais}</option>`;
+                    })
+                }
+    }) 
+}
+
+llenarPaises()
+
+/*
+ * Verificar si el país seleccionado es Panamá 
+*/
+
+const VerificarPais = (codigo) => {
+    if(codigo == 507){
+        selectProvincia.disabled = false;
+        $.ajax({
+            type: "GET",
+            url: "queryProvincias.php",
+                    success: (resp) => {
+                        let output = JSON.parse(resp)
+                        output.map(({codigo, provincia}) => {
+                            selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
+                        })
+                    }
+        }) 
+    }else{
+        selectProvincia.disabled = true;
+    }
+}
+
+const getDistrito = (codigo) => {
+    let data = `codigo=${codigo}`
+    selectDistrito.innerHTML = '';
+    selectCorregimiento.innerHTML = '';
+    $.ajax({
+        type: "POST",
+        url: "queryDistritos.php",
+                data: data,
+                success: (resp) => {
+                    let output = JSON.parse(resp)
+                    output.map(({codigo, distrito}) => {
+                        selectDistrito.innerHTML += `<option value="${codigo}">${distrito}</option>`;
+                    })
+                }
+    }) 
+}
+
+const getCorregimientos = (codigo) => {
+    let data = `codigo=${codigo}`
+    selectCorregimiento.innerHTML = '';
+    $.ajax({
+        type: "POST",
+        url: "queryCorregimientos.php",
+                data: data,
+                success: (resp) => {
+                    let output = JSON.parse(resp)
+                    output.map(({codigo, corregimiento}) => {
+                        selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`;
+                    })
+                }
+    }) 
+}
+
+selectPaises.addEventListener('input', ()=> {
+    VerificarPais(selectPaises.value)
+})
+
+selectProvincia.addEventListener('input', ()=> {
+    getDistrito(selectProvincia.value)
+})
+
+selectDistrito.addEventListener('input', ()=> {
+    getCorregimientos(selectDistrito.value)
 })
