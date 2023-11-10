@@ -3,7 +3,7 @@ include('./Conexion.php');
 
 function SelectPaises(){
 $codigo = $_POST['codigo'];
-$conexion = new Conexion("localhost", "root", "", "ds7");
+$conexion = new Conexion();
 $conn = $conexion->conectar();
 
 $query = 'SELECT * FROM distrito WHERE codigo_provincia = '.$codigo.'';

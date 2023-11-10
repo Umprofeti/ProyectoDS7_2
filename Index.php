@@ -15,9 +15,10 @@
         <div class="optionsSenders">
             <button class="buttonSender">Crear</button>
             <button class="buttonSender">Actualizar</button>
+            <button class="buttonSender">Cheque</button>
             <button class="buttonSender">Salir</button>
         </div>
-        <form action="" method="">
+        <form id="form_sender">
             <div class="wrapper">
                 <label for="prefijo">Prefijo:</label>
                 <select id="prefijo" name="prefijo" required>
@@ -108,14 +109,14 @@
 
                 <label>Tipo de Sangre: </label>
                 <select name="TipoSangre" id="TipoSangre">
-                    <option value="0">A+</option>
-                    <option value="1">A-</option>
-                    <option value="2">O+</option>
-                    <option value="3">O-</option>
-                    <option value="4">B+</option>
-                    <option value="5">B-</option>
-                    <option value="6">AB+</option>
-                    <option value="7">AB-</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
                 </select>
             </div>
             <label for="CMedica">Condición Médica:</label>
@@ -144,7 +145,7 @@
                 <label for="Casa">Casa:</label>
                 <input type="text" name="Casa" id="Casa">
             </div>
-            <input type="submit" value="Enviar">
+            <input type="submit"  id="btn_Submit" value="Enviar">
         </form>
     </main>
     <footer>

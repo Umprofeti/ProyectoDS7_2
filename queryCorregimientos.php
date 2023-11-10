@@ -3,7 +3,7 @@ include('./Conexion.php');
 
 function SelectPaises(){
 $codigo = $_POST['codigo'];
-$conexion = new Conexion("localhost", "root", "", "ds7");
+$conexion = new Conexion();
 $conn = $conexion->conectar();
 
 $query = 'SELECT * FROM corregimiento WHERE codigo_distrito = '.$codigo.' ORDER BY nombre_corregimiento';

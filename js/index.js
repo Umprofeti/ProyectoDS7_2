@@ -3,7 +3,7 @@
 /* 
     * Campos del formulario
 */
-
+var selectPrefijo = document.getElementById("prefijo");
 var inputTomo =  document.getElementById("tomo");
 var inputAsiento = document.getElementById("asiento");
 var inputNombre1 = document.getElementById("nombre1");
@@ -17,7 +17,7 @@ var inputCMedica = document.getElementById("CMedica");
 var inputComunidad = document.getElementById("Comunidad");
 var inputCalle = document.getElementById("Calle");
 var inputCasa = document.getElementById("Casa"); 
-var scivil=document.getElementById("scivil");
+
 
 /*
  * Select Inputs 
@@ -26,6 +26,8 @@ var selectPaises = document.getElementById("Pais");
 var selectProvincia = document.getElementById("Provincia");
 var selectDistrito = document.getElementById("Distrito");
 var selectCorregimiento = document.getElementById("Corregimiento");
+var scivil=document.getElementById("scivil");
+var selectTSangre = document.getElementById("TipoSangre");
 /* Radio Buttons */
 
 var rbGeneroM = document.getElementById("generoM");
@@ -35,7 +37,10 @@ var rbCasadaNo = document.getElementById("casadaNo");
 /* 
     @param htmlInput : HTML_ELEMENT
 */
-
+/*
+    * sumbit BTN
+*/
+var btn_Submit = document.getElementById("btn_Submit");
 /*
  Funcion que valida solamente existan números dentro del campo
     
@@ -270,4 +275,66 @@ selectProvincia.addEventListener('input', ()=> {
 
 selectDistrito.addEventListener('input', ()=> {
     getCorregimientos(selectDistrito.value)
+})
+
+const checkACasada = () => {
+    if(casadaSi){
+        return '1'
+    }
+    if(casadaNo){
+        return '0'
+    }
+}
+const checkGenero = () => {
+    if(generoF){
+        return 'F'
+    }
+    if(generoM){
+        return 'M'
+    }
+}
+
+const insertData = () => {
+    const form = $('#form_sender');
+    form.submit((e) => {
+        e.preventDefault();
+    });
+    let data = {
+        prefijo: selectPrefijo.value,
+        tomo: inputTomo.value,
+        asiento: inputAsiento.value,
+        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`,
+        nombre1: inputNombre1.value,
+        nombre2: inputNombre2.value,
+        apellido1: inputApellido1.value,
+        apellido2: inputApellido2.value,
+        genero: checkGenero(),
+        estado_civil: scivil.value,
+        apellido_casada: inputACasada.value,
+        usa_apellido_casada: checkACasada(),
+        fecha_nacimiento: fechaNacimientoInput.value,
+        peso: inputPeso.value,
+        estatura: inputEstatura.value,
+        tipo_sangre:  selectTSangre.value,
+        c_medica: inputCMedica.value,
+        provincia: selectProvincia.value,
+        distrito: selectDistrito.value,
+        corregimiento: selectCorregimiento.value,
+        comunidad: inputComunidad.value,
+        calle: inputCalle.value,
+        casa: inputCasa.value,
+        estado: 1    
+    }
+    $.ajax({
+        type: "POST",
+        url: "insertDataForm.php",
+        data: data,
+        success: (resp) => {
+           console.log(resp)
+        }
+    })
+}
+
+btn_Submit.addEventListener('click', () => {
+    insertData();
 })

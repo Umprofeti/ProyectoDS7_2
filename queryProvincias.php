@@ -3,7 +3,7 @@ include('./Conexion.php');
 
 
 function SelectPaises(){
-$conexion = new Conexion("localhost", "root", "", "ds7");
+$conexion = new Conexion();
 $conn = $conexion->conectar();
 
 $query = 'SELECT * FROM provincia ORDER BY nombre_provincia';
