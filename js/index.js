@@ -281,63 +281,85 @@ selectDistrito.addEventListener('input', ()=> {
 })
 
 const checkACasada = () => {
-    if(casadaSi){
+    if(casadaSi.checked){
         return '1'
     }
-    if(casadaNo){
+    if(casadaNo.checked){
         return '0'
     }
+    return '0'
 }
 const checkGenero = () => {
-    if(generoF){
+    if(generoF.checked){
         return 'F'
     }
-    if(generoM){
+    if(generoM.checked){
         return 'M'
     }
 }
 
 const insertData = () => {
+    let data = {
+            prefijo: selectPrefijo.value,
+            tomo: inputTomo.value,
+            asiento: inputAsiento.value,
+            cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`,
+            nombre1: inputNombre1.value,
+            nombre2: inputNombre2.value,
+            apellido1: inputApellido1.value,
+            apellido2: inputApellido2.value,
+            genero: checkGenero(),
+            estado_civil: scivil.value,
+            apellido_casada: inputACasada.value,
+            usa_apellido_casada: checkACasada(),
+            fecha_nacimiento: fechaNacimientoInput.value,
+            peso: inputPeso.value,
+            estatura: inputEstatura.value,
+            tipo_sangre:  selectTSangre.value,
+            c_medica: inputCMedica.value,
+            provincia: selectProvincia.value,
+            distrito: selectDistrito.value,
+            corregimiento: selectCorregimiento.value,
+            comunidad: inputComunidad.value,
+            calle: inputCalle.value,
+            casa: inputCasa.value,
+            estado: 1    
+        }
+        $.ajax({
+            type: "POST",
+            url: "insertDataForm.php",
+            data: data,
+            success: (resp) => {
+               console.log(resp)
+            }
+        })
+}
+
+const verifyPrimaryKey= () => {
+    let result;
+    let data = {
+        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`
+    }
+    $.ajax({
+        type: "POST",
+        url: "queryCedula.php",
+        data: data,
+        success: (resp) => {
+           let output = JSON.parse(resp);
+           if(output){
+                insertData();
+           }else{
+            console.log("Datos ya registrados")
+           }
+        }
+    })
+    return result;
+}
+
+btn_Submit.addEventListener('click', () => {
     const form = $('#form_sender');
     form.submit((e) => {
         e.preventDefault();
     });
-    let data = {
-        prefijo: selectPrefijo.value,
-        tomo: inputTomo.value,
-        asiento: inputAsiento.value,
-        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`,
-        nombre1: inputNombre1.value,
-        nombre2: inputNombre2.value,
-        apellido1: inputApellido1.value,
-        apellido2: inputApellido2.value,
-        genero: checkGenero(),
-        estado_civil: scivil.value,
-        apellido_casada: inputACasada.value,
-        usa_apellido_casada: checkACasada(),
-        fecha_nacimiento: fechaNacimientoInput.value,
-        peso: inputPeso.value,
-        estatura: inputEstatura.value,
-        tipo_sangre:  selectTSangre.value,
-        c_medica: inputCMedica.value,
-        provincia: selectProvincia.value,
-        distrito: selectDistrito.value,
-        corregimiento: selectCorregimiento.value,
-        comunidad: inputComunidad.value,
-        calle: inputCalle.value,
-        casa: inputCasa.value,
-        estado: 1    
-    }
-    $.ajax({
-        type: "POST",
-        url: "insertDataForm.php",
-        data: data,
-        success: (resp) => {
-           console.log(resp)
-        }
-    })
-}
-
-btn_Submit.addEventListener('click', () => {
-    insertData();
+    verifyPrimaryKey();
 })
