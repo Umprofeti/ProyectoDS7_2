@@ -65,7 +65,10 @@ const onlyChar = (htmlInput) => {
 const onlyNumbersAndChar = (htmlInput) => {
     htmlInput.value = htmlInput.value.replace(/[^A-Za-z0-9]+/g, '');
 }
-
+/*Funcion modificada para permitir espacios en los campos comunidad y calle*/ 
+const onlyNumbersAndCharSpaces = (htmlInput) => {
+    htmlInput.value = htmlInput.value.replace(/[^A-Za-z0-9\s]+/g, '');
+}
 
 const onlyNumbersAndTwoDecimal = (htmlInput) => {
     let inputValue = htmlInput.value;
@@ -182,10 +185,10 @@ inputCMedica.addEventListener('input', ()=> {
     onlyChar(inputCMedica);
 })
 inputComunidad.addEventListener('input',()=>{
-    onlyNumbersAndChar(inputComunidad);
+    onlyNumbersAndCharSpaces(inputComunidad);
 })
 inputCalle.addEventListener('input',()=>{
-    onlyNumbersAndChar(inputCalle);
+    onlyNumbersAndCharSpaces(inputCalle);
 })
 inputCasa.addEventListener('input',()=>{
     onlyNumbersAndChar(inputCasa);
