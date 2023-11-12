@@ -218,22 +218,60 @@ llenarPaises()
 */
 
 const VerificarPais = (codigo) => {
-    if(codigo == 507){
+    // Verifica si los campos ya son de tipo input
+    const provinciaIsInput = selectProvincia.tagName.toLowerCase() === 'input';
+    const corregimientoIsInput = selectCorregimiento.tagName.toLowerCase() === 'input';
+    const distritoIsInput = selectDistrito.tagName.toLowerCase() === 'input';
+
+    if (codigo == 507) {
         selectProvincia.disabled = false;
         $.ajax({
             type: "GET",
             url: "queryProvincias.php",
-                    success: (resp) => {
-                        let output = JSON.parse(resp)
-                        output.map(({codigo, provincia}) => {
-                            selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
-                        })
-                    }
-        }) 
-    }else{
+            success: (resp) => {
+                let output = JSON.parse(resp);
+                // Limpiar opciones existentes antes de agregar nuevas
+                selectProvincia.innerHTML = '';
+                output.map(({ codigo, provincia }) => {
+                    selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
+                });
+            },
+            error: (error) => {
+                console.error("Error al obtener provincias:", error);
+            }
+        });
+
+        // Restaura los campos a select si ya son de tipo input
+        if (provinciaIsInput) {
+            selectProvincia.outerHTML = '<select id="selectProvincia"></select>';
+        }
+        if (corregimientoIsInput) {
+            selectCorregimiento.outerHTML = '<select id="selectCorregimiento"></select>';
+        }
+        if (distritoIsInput) {
+            selectDistrito.outerHTML = '<select id="selectDistrito"></select>';
+        }
+    } else {
+        // Para países que no son Panamá
         selectProvincia.disabled = true;
+        selectProvincia.innerHTML = '';
+        selectProvincia.outerHTML = '<input type="text" id="inputProvincia">';
+
+        // Cambiar campos a input si ya son de tipo select
+        if (!corregimientoIsInput) {
+            selectCorregimiento.outerHTML = '<input type="text" id="inputCorregimiento">';
+        }
+        selectCorregimiento.disabled = true;
+        selectCorregimiento.innerHTML = '';
+
+        if (!distritoIsInput) {
+            selectDistrito.outerHTML = '<input type="text" id="inputDistrito">';
+        }
+        selectDistrito.disabled = true;
+        selectDistrito.innerHTML = '';
     }
-}
+};
+
 
 const getDistrito = (codigo) => {
     let data = `codigo=${codigo}`
