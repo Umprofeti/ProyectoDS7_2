@@ -1,8 +1,6 @@
 <?php 
 
     /* 
-        * Función para insertar datos en la db
-
         INSERT INTO generales VALUES(prefijo, tomo, asiento, cedula, nombre1, nombre2, apellido1, apellido2, estado_civil, 
         apellido_casada, usa_apellido_casada, provincia, distrito, corregimiento, comunidad, calle, casa, estado, 
         fecha_nacimiento, estatura, peso, condición_fisica, tipo_de_sangre, genero)
@@ -66,17 +64,15 @@
             "' . $_POST['pais']. '"
         )';
 
-        $result = $conn -> query($query);
-        if ($result === false) {
-            echo "Falló la consulta: " . $conn->error_list[0];
-        } else {
-            // Aquí se maneja la consulta para mostrar los datos
-            return "Datos Guardados Correctamente!";
-        }
-        $conexion->cerrar();
+    $result = $conn->query($query);
+    if ($result === false) {
+        echo "Error al insertar datos: " . $conn->error_list[0];
+    } else {
+        echo "Datos Guardados Correctamente!";
     }
 
-    // Se muestran los datos de la consulta
-    $json = json_encode(insertData());
-    echo($json);
+    $conexion->cerrar();
+}
+
+insertData();
 ?>

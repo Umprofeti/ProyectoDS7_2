@@ -369,10 +369,24 @@ const insertData = () => {
             url: "insertDataForm.php",
             data: data,
             success: (resp) => {
-               console.log(resp)
-            }
-        })
-}
+                console.log("Respuesta de insertDataForm.php:", resp);
+                mostrarPopup(resp);
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error("Error en la solicitud AJAX (insertDataForm.php):", textStatus, errorThrown);
+                mostrarPopup("Error al insertar datos");
+            },
+        });
+    };
+    
+    const mostrarPopup = (mensaje) => {
+        Swal.fire({
+            icon: 'info', // Puedes cambiarlo según el tipo de mensaje que desees mostrar
+            title: 'Mensaje',
+            text: mensaje,
+            confirmButtonText: 'Aceptar'
+        });
+    };
 
 const verifyPrimaryKey= () => {
     let result;

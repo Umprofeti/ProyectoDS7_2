@@ -28,7 +28,7 @@ main {
 }
 
 .optionsSenders {
-    width: 60%;
+    width: 48%;
     padding: 10px 20px 10px 10px;
     border-radius: 20px;
     display: flex;
@@ -48,6 +48,10 @@ main {
     font-weight: bold;
     background: var(--color-primary);
     padding: 10px 5px 10px 5px;
+    cursor: pointer;
+}
+.buttonSender:hover {
+    box-shadow: 4px 4px 10px rgba(255, 253, 253, 0.1);
 }
 
 form {
@@ -113,8 +117,12 @@ input[type="submit"] {
     font-weight: bold;
     text-align: center;
     padding: auto;
+    cursor: pointer;
 }
 
+input[type="submit"]:hover {
+    background-color: rgba(93, 58, 183, 0.873)
+}
 input[type="radio"]{
     box-shadow: none;
 }
