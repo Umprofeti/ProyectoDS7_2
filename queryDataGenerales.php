@@ -41,6 +41,7 @@ function queryGenerales(){
                 "condición_fisica" => $fila["condición_fisica"],
                 "tipo_de_sangre" => $fila["tipo_de_sangre"],
                 "genero" => $fila["genero"],
+                "pais" => $fila["pais"]
             ];
         }
         return $datos;

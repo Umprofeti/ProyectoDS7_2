@@ -36,7 +36,8 @@
             peso,
             condición_fisica,
             tipo_de_sangre,
-            genero
+            genero,
+            pais
         ) VALUES (
             "' . $_POST['prefijo'] . '",
             "' . $_POST['tomo'] . '",
@@ -61,7 +62,8 @@
             "' . $_POST['peso'] . '",
             "' . $_POST['c_medica'] . '",
             "' . $_POST['tipo_sangre'] . '",
-            "' . $_POST['genero'] . '"
+            "' . $_POST['genero'] . '",
+            "' . $_POST['pais']. '"
         )';
 
         $result = $conn -> query($query);

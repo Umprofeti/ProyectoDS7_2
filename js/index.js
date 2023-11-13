@@ -231,11 +231,14 @@ const getCorregimientos = (codigo) => {
                 data: data,
                 success: (resp) => {
                     let output = JSON.parse(resp)
+                    selectCorregimiento.innerHTML = '';
                     output.map(({codigo, corregimiento}) => {
                         codigo = Number(codigo)
-                        codigo === 130208 
-                        ? selectCorregimiento.innerHTML += `<option selected="selected" value="${codigo}">${corregimiento}</option>`
-                        : selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`;
+                        if(codigo === 130208 ){
+                            selectCorregimiento.innerHTML += `<option selected="selected" value="${codigo}">${corregimiento}</option>`
+                        }else{
+                            selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`
+                        }
                     })
                 }
     }) 
@@ -254,9 +257,13 @@ const VerificarPais = (codigo) => {
                         let output = JSON.parse(resp)
                         output.map(({codigo, provincia}) => {
                             codigo = Number(codigo)
-                            codigo === 13 ? selectProvincia.innerHTML += `<option selected="selected" value="${codigo}">${provincia}</option>`:
-                            selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
-                            getDistrito(selectProvincia.value)
+                            
+                            if(codigo===13){
+                                selectProvincia.innerHTML += `<option selected="selected" value="${codigo}">${provincia}</option>`
+                                getDistrito(selectProvincia.value)
+                            }else{
+                                selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
+                            }
                         })
                     }
         }) 
@@ -354,7 +361,8 @@ const insertData = () => {
             comunidad: inputComunidad.value,
             calle: inputCalle.value,
             casa: inputCasa.value,
-            estado: 1    
+            estado: 1,
+            pais: selectPaises.value    
         }
         $.ajax({
             type: "POST",
@@ -400,13 +408,25 @@ btn_Submit.addEventListener('click', () => {
 */
 const fillData = (data) => {
     /* 
-        TODO:  verificar el genero
-        TODO: verificar el estado civil
         TODO: verificar apellido casada (radio button)
-        TODO: verificar tipo de sangre
-        TODO: Asignar valores de los select de provincia, distrito y corregimiento
-        TODO: verificar el país que viene de la base de datos
     */
+
+    if(data.genero == 'M'){
+        generoM.checked = true
+        casadaNo.disabled = true;
+        casadaSi.disabled = true;
+    }
+    if(data.genero == 'F'){
+        generoF.checked = true
+        casadaNo.disabled = false;
+        casadaSi.disabled = false;
+        if(data.usa_apellido_casada == 0){
+            casadaNo.checked = true
+        }
+        if(data.usa_apellido_casada == 1){
+            casadaSi.checked = true;
+        }
+    }
     inputNombre1.value = data.nombre1
     inputNombre2.value = data.nombre2
     inputApellido1.value = data.apellido1
@@ -416,13 +436,16 @@ const fillData = (data) => {
     inputPeso.value = data.peso
     inputEstatura.value = data.estatura
     inputCMedica.value = data.condición_fisica
-    /* selectProvincia.value = data.
-    selectDistrito.value
-    selectCorregimiento.value */
+    selectProvincia.value = data.provincia
+    selectDistrito.value = data.distrito
+    selectCorregimiento.value = data.corregimiento
+    selectPaises.value = data.pais
     inputComunidad.value = data.comunidad
     inputCalle.value = data.calle
     inputCasa.value = data.casa          
-            
+    scivil.value = data.estado_civil
+    selectTSangre.value = data.tipo_de_sangre
+
 }
 /*  
     * Funcion que hace la consulta a la base de datos para extraer la data
@@ -475,6 +498,7 @@ const createButton = (state) => {
             stateInputs(true);
         })
     }else{
+        let btn = document.getElementById("searchBtn")
         wrapperCedula.removeChild(btn);
     }
 }
@@ -497,10 +521,13 @@ let hState = state;
 if(hState == 1 ){
     disableRequiredInput(false)
     createButton(state);
+    $('#form_sender').trigger("reset");
 }
 if(hState == 0){
-    disableRequiredInput(true)
+    disableRequiredInput(false);
+    stateInputs(false);
     createButton(state);
+    $('#form_sender').trigger("reset");
 }
 return hState
 }

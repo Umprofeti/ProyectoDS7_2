@@ -74,11 +74,11 @@
                 <div class="wrapper">
                         <label>Estado civil:</label>
                         <select id="scivil" name="scivil" required>
-                    <option>Soltero(a)</option>
-                    <option>Casado(a)</option>
-                    <option>Divorciado(a)</option>
-                    <option>Viudo(a)</option>
-                    </select>
+                            <option value="Soltero(a)">Soltero(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Viudo(a)">Viudo(a)</option>
+                        </select>
                     </div>
                 <div class="wrapper">
                     <label>¿Apellido de Casada?:</label>
@@ -109,14 +109,14 @@
 
                 <label>Tipo de Sangre: </label>
                 <select name="TipoSangre" id="TipoSangre">
-                    <option>A+</option>
-                    <option>A-</option>
-                    <option>O+</option>
-                    <option>O-</option>
-                    <option>B+</option>
-                    <option>B-</option>
-                    <option>AB+</option>
-                    <option>AB-</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
                 </select>
             </div>
             <label for="CMedica">Condición Médica:</label>
