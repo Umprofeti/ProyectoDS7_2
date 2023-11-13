@@ -1,4 +1,8 @@
 <?php 
+/*  
+    * Funcion para verificar si la llave primaria está en la db
+*/
+
     include('./Conexion.php');
 
     function queryCedula(){

@@ -1,6 +1,8 @@
 <?php 
 
     /* 
+        * Función para insertar datos en la db
+
         INSERT INTO generales VALUES(prefijo, tomo, asiento, cedula, nombre1, nombre2, apellido1, apellido2, estado_civil, 
         apellido_casada, usa_apellido_casada, provincia, distrito, corregimiento, comunidad, calle, casa, estado, 
         fecha_nacimiento, estatura, peso, condición_fisica, tipo_de_sangre, genero)

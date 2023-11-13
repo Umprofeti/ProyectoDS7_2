@@ -1,4 +1,9 @@
 <?php 
+
+/* 
+    * Consulta para obtener los distritos
+*/
+
 include('./Conexion.php');
 
 function SelectPaises(){

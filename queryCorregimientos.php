@@ -1,4 +1,9 @@
 <?php 
+
+/*  
+    * Consulta para obtener los corregimientos de la db
+*/
+
 include('./Conexion.php');
 
 function SelectPaises(){

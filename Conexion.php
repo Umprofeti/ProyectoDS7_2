@@ -1,4 +1,8 @@
 <?php 
+/*
+ * Clase para manejar la conexión a la base de datos.
+ * toma como valores implicitos el host, usuario, contraseña y base de datos a conectar 
+*/
 class Conexion {
 
     private $host = "localhost";

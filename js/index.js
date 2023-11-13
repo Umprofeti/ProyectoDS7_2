@@ -198,43 +198,6 @@ inputCasa.addEventListener('input',()=>{
     * Función para el Llenado del select de países
 */
 
-const llenarPaises = () => {
-    $.ajax({
-        type: "GET",
-        url: "queryPaises.php",
-                success: (resp) => {
-                    let output = JSON.parse(resp)
-                    output.map(({codigo, pais}) => {
-                        selectPaises.innerHTML += `<option value="${codigo}">${pais}</option>`;
-                    })
-                }
-    }) 
-}
-
-llenarPaises()
-
-/*
- * Verificar si el país seleccionado es Panamá 
-*/
-
-const VerificarPais = (codigo) => {
-    if(codigo == 507){
-        selectProvincia.disabled = false;
-        $.ajax({
-            type: "GET",
-            url: "queryProvincias.php",
-                    success: (resp) => {
-                        let output = JSON.parse(resp)
-                        output.map(({codigo, provincia}) => {
-                            selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
-                        })
-                    }
-        }) 
-    }else{
-        selectProvincia.disabled = true;
-    }
-}
-
 const getDistrito = (codigo) => {
     let data = `codigo=${codigo}`
     selectDistrito.innerHTML = '';
@@ -246,7 +209,12 @@ const getDistrito = (codigo) => {
                 success: (resp) => {
                     let output = JSON.parse(resp)
                     output.map(({codigo, distrito}) => {
-                        selectDistrito.innerHTML += `<option value="${codigo}">${distrito}</option>`;
+                        codigo = Number(codigo)
+                        codigo == 1302
+                        ? selectDistrito.innerHTML += `<option selected="selected" value="${codigo}">${distrito}</option>`
+                        : selectDistrito.innerHTML += `<option value="${codigo}">${distrito}</option>`
+                        ;
+                        getCorregimientos(selectDistrito.value)
                     })
                 }
     }) 
@@ -262,14 +230,75 @@ const getCorregimientos = (codigo) => {
                 success: (resp) => {
                     let output = JSON.parse(resp)
                     output.map(({codigo, corregimiento}) => {
-                        selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`;
+                        codigo = Number(codigo)
+                        codigo === 130208 
+                        ? selectCorregimiento.innerHTML += `<option selected="selected" value="${codigo}">${corregimiento}</option>`
+                        : selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`;
                     })
                 }
     }) 
 }
 
+/*
+ * Verificar si el país seleccionado es Panamá 
+*/
+
+const VerificarPais = (codigo) => {
+    if(codigo == 507){
+        $.ajax({
+            type: "GET",
+            url: "queryProvincias.php",
+                    success: (resp) => {
+                        let output = JSON.parse(resp)
+                        output.map(({codigo, provincia}) => {
+                            codigo = Number(codigo)
+                            codigo === 13 ? selectProvincia.innerHTML += `<option selected="selected" value="${codigo}">${provincia}</option>`:
+                            selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
+                            getDistrito(selectProvincia.value)
+                        })
+                    }
+        }) 
+
+        selectProvincia.disabled = false;
+        selectDistrito.disabled = false;
+        selectCorregimiento.disabled = false;
+    }else{
+        selectProvincia.disabled = true;
+        selectDistrito.disabled = true;
+        selectCorregimiento.disabled = true;
+    }
+}
+
+/*
+    * Funcion para obtener la data de los países en la db
+*/
+const llenarPaises = () => {
+    $.ajax({
+        type: "GET",
+        url: "queryPaises.php",
+                success: (resp) => {
+                    let output = JSON.parse(resp)
+                    output.map(({codigo, pais}) => {
+                        if(codigo == 507){
+                            selectPaises.innerHTML += `<option selected="selected" value="${codigo}" >${pais}</option>`
+                            VerificarPais(selectPaises.value)
+                           
+                            
+                        }else{
+                            selectPaises.innerHTML += `<option value="${codigo}" >${pais}</option>`
+                        }
+                    })
+                }
+    }) 
+}
+
+llenarPaises()
+
 selectPaises.addEventListener('input', ()=> {
     VerificarPais(selectPaises.value)
+    selectProvincia.innerHTML = '';
+    selectDistrito.innerHTML = '';
+    selectCorregimiento.innerHTML = '';
 })
 
 selectProvincia.addEventListener('input', ()=> {

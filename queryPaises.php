@@ -1,6 +1,8 @@
 <?php 
 include('./Conexion.php');
-
+/*  
+    * Consulta para obtener los paises de la db
+*/
 
 function SelectPaises(){
 $conexion = new Conexion();

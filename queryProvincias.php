@@ -1,7 +1,9 @@
 <?php 
 include('./Conexion.php');
 
-
+/* 
+    * Consulta para seleccionar los paises
+*/
 function SelectPaises(){
 $conexion = new Conexion();
 $conn = $conexion->conectar();
