@@ -19,7 +19,7 @@
             <button class="buttonSender">Salir</button>
         </div>
         <form id="form_sender">
-            <div class="wrapper">
+            <div class="wrapper" id="wrapperCedula">
                 <label for="prefijo">Prefijo:</label>
                 <select id="prefijo" name="prefijo" required>
                     <option>1</option>

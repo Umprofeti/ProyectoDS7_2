@@ -28,8 +28,8 @@ var selectDistrito = document.getElementById("Distrito");
 var selectCorregimiento = document.getElementById("Corregimiento");
 var scivil=document.getElementById("scivil");
 var selectTSangre = document.getElementById("TipoSangre");
-/* Radio Buttons */
 
+/* Radio Buttons */
 var rbGeneroM = document.getElementById("generoM");
 var rbGeneroF = document.getElementById("generoF");
 var rbCasadaSi = document.getElementById("casadaSi");
@@ -41,6 +41,8 @@ var rbCasadaNo = document.getElementById("casadaNo");
     * sumbit BTN
 */
 var btn_Submit = document.getElementById("btn_Submit");
+var buttonsSenders = document.querySelectorAll(".buttonSender");
+var wrapperCedula = document.getElementById("wrapperCedula");
 /*
  Funcion que valida solamente existan números dentro del campo
     
@@ -391,4 +393,120 @@ btn_Submit.addEventListener('click', () => {
         e.preventDefault();
     });
     verifyPrimaryKey();
+})
+/* 
+    * Funcion para llenar los datos de los inputs luego de recibir la data
+    @Param data:JSON
+*/
+const fillData = (data) => {
+    /* 
+        TODO:  verificar el genero
+        TODO: verificar el estado civil
+        TODO: verificar apellido casada (radio button)
+        TODO: verificar tipo de sangre
+        TODO: Asignar valores de los select de provincia, distrito y corregimiento
+        TODO: verificar el país que viene de la base de datos
+    */
+    inputNombre1.value = data.nombre1
+    inputNombre2.value = data.nombre2
+    inputApellido1.value = data.apellido1
+    inputApellido2.value = data.apellido2
+    inputACasada.value = data.apellido_casada
+    fechaNacimientoInput.value = data.fecha_nacimiento
+    inputPeso.value = data.peso
+    inputEstatura.value = data.estatura
+    inputCMedica.value = data.condición_fisica
+    /* selectProvincia.value = data.
+    selectDistrito.value
+    selectCorregimiento.value */
+    inputComunidad.value = data.comunidad
+    inputCalle.value = data.calle
+    inputCasa.value = data.casa          
+            
+}
+/*  
+    * Funcion que hace la consulta a la base de datos para extraer la data
+*/
+const getGenerales = () => {
+    let data = {
+        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`
+    }
+    $.ajax({
+        type: "POST",
+        url: "queryDataGenerales.php",
+        data: data,
+        success: (resp) => {
+           let output = JSON.parse(resp);
+           fillData(output[0])
+           console.log(output)
+        }
+    })
+}
+/* 
+    * Funcion para deshabilitar y habilitar todos los campos exceptos los de la cedula
+    @Param state: Boolean
+*/
+
+const stateInputs = (state) => {
+    selectPrefijo.disabled = state;
+    inputTomo.readOnly = state;
+    inputAsiento.readOnly = state;
+}
+
+/*  
+* Funcion para crear el botón dependiendo del stado del botón
+*/
+
+const createButton = (state) => {
+    const button = document.createElement("button");
+    button.classList.add("buttonSender")
+    button.id = "searchBtn"
+    button.textContent="Buscar";
+    button.type = "submit";
+    if(state == 1){
+        wrapperCedula.appendChild(button);
+        let btn = document.getElementById("searchBtn")
+        btn.addEventListener("click", ()=> {
+            const form = $('#form_sender');
+            form.submit((e) => {
+                e.preventDefault();
+            });
+            getGenerales();
+            stateInputs(true);
+        })
+    }else{
+        wrapperCedula.removeChild(btn);
+    }
+}
+
+const disableRequiredInput = (state) => {
+    inputNombre1.required = state;
+    inputApellido1.required = state;
+    fechaNacimientoInput.required = state;
+    inputEstatura.required = state;
+    inputPeso.required = state;
+}
+
+/* 
+* Funcion para establecer un estado en los botones
+@Param state: int
+*/
+
+const handleBtnState = (state) => {
+let hState = state;
+if(hState == 1 ){
+    disableRequiredInput(false)
+    createButton(state);
+}
+if(hState == 0){
+    disableRequiredInput(true)
+    createButton(state);
+}
+return hState
+}
+
+buttonsSenders.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        handleBtnState(index)
+    })
 })
