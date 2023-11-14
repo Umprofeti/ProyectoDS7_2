@@ -4,7 +4,7 @@
     * Campos del formulario
 */
 var selectPrefijo = document.getElementById("prefijo");
-var inputTomo =  document.getElementById("tomo");
+var inputTomo = document.getElementById("tomo");
 var inputAsiento = document.getElementById("asiento");
 var inputNombre1 = document.getElementById("nombre1");
 var inputNombre2 = document.getElementById("nombre2");
@@ -16,7 +16,7 @@ var inputEstatura = document.getElementById("estatura");
 var inputCMedica = document.getElementById("CMedica");
 var inputComunidad = document.getElementById("Comunidad");
 var inputCalle = document.getElementById("Calle");
-var inputCasa = document.getElementById("Casa"); 
+var inputCasa = document.getElementById("Casa");
 
 
 /*
@@ -26,7 +26,7 @@ var selectPaises = document.getElementById("Pais");
 var selectProvincia = document.getElementById("Provincia");
 var selectDistrito = document.getElementById("Distrito");
 var selectCorregimiento = document.getElementById("Corregimiento");
-var scivil=document.getElementById("scivil");
+var scivil = document.getElementById("scivil");
 var selectTSangre = document.getElementById("TipoSangre");
 
 /* Radio Buttons */
@@ -50,7 +50,7 @@ var wrapperCedula = document.getElementById("wrapperCedula");
 const onlyNumbers = (htmlInput) => {
     let input = htmlInput.value
     let regex = /[0-9+]+/u;
-    if(!regex.test(input)){
+    if (!regex.test(input)) {
         htmlInput.value = "";
     }
 }
@@ -67,7 +67,7 @@ const onlyChar = (htmlInput) => {
 const onlyNumbersAndChar = (htmlInput) => {
     htmlInput.value = htmlInput.value.replace(/[^A-Za-z0-9]+/g, '');
 }
-/*Funcion modificada para permitir espacios en los campos comunidad y calle*/ 
+/*Funcion modificada para permitir espacios en los campos comunidad y calle*/
 const onlyNumbersAndCharSpaces = (htmlInput) => {
     htmlInput.value = htmlInput.value.replace(/[^A-Za-z0-9\s]+/g, '');
 }
@@ -76,17 +76,17 @@ const onlyNumbersAndTwoDecimal = (htmlInput) => {
     let inputValue = htmlInput.value;
     let sanitizedValue = inputValue.replace(/[^0-9.]/, '');//este deberia evitar que characteres sean introducidos
 
-    if(isNaN(inputValue)){
+    if (isNaN(inputValue)) {
         htmlInput.value = sanitizedValue;
     }
     // Divide el valor en dos partes: parte antes del punto y parte después del punto
     let parts = sanitizedValue.split('.');
-    
+
 
     // Si hay más de una parte (es decir, hay un punto decimal), formatea la parte después del punto a dos caracteres
     if (parts.length > 1) {
         parts[1] = parts[1].slice(0, 2); // Limita la parte después del punto a dos caracteres
-        if(parts[2] == ''){
+        if (parts[2] == '') {
             parts.pop();
         }
     }
@@ -106,7 +106,7 @@ casadaSi.disabled = true;
 casadaNo.disabled = true;
 
 // Agrega eventos de cambio a los radio buttons de género
-generoF.addEventListener('change', function() {
+generoF.addEventListener('change', function () {
     if (generoF.checked) {
         // Si el género es "F", habilita el campo "Apellido de Casada" y los radio buttons
         apellidoCasada.disabled = false;
@@ -129,7 +129,7 @@ casadaSi.addEventListener('click', () => {
     apellidoCasada.disabled = false;
 })
 
-generoM.addEventListener('change', function() {
+generoM.addEventListener('change', function () {
     if (generoM.checked) {
         // Si el género es "M", deshabilita el campo "Apellido de Casada", los radio buttons y limpia la seleccion
         apellidoCasada.disabled = true;
@@ -161,38 +161,38 @@ fechaNacimientoInput.addEventListener('change', function () {
 inputTomo.addEventListener('input', () => {
     onlyNumbers(inputTomo)
 })
-inputAsiento.addEventListener('input', ()=> {
+inputAsiento.addEventListener('input', () => {
     onlyNumbers(inputAsiento)
 })
 
-inputNombre1.addEventListener('input', ()=> {
+inputNombre1.addEventListener('input', () => {
     onlyChar(inputNombre1);
 })
 
-inputNombre2.addEventListener('input', ()=> {
+inputNombre2.addEventListener('input', () => {
     onlyChar(inputNombre2);
 })
 
-inputApellido1.addEventListener('input', ()=> {
+inputApellido1.addEventListener('input', () => {
     onlyChar(inputApellido1);
 })
 
-inputApellido2.addEventListener('input', ()=> {
+inputApellido2.addEventListener('input', () => {
     onlyChar(inputApellido2);
 })
-apellidoCasada.addEventListener('input', ()=> {
+apellidoCasada.addEventListener('input', () => {
     onlyChar(apellidoCasada);
 })
-inputCMedica.addEventListener('input', ()=> {
+inputCMedica.addEventListener('input', () => {
     onlyChar(inputCMedica);
 })
-inputComunidad.addEventListener('input',()=>{
+inputComunidad.addEventListener('input', () => {
     onlyNumbersAndCharSpaces(inputComunidad);
 })
-inputCalle.addEventListener('input',()=>{
+inputCalle.addEventListener('input', () => {
     onlyNumbersAndCharSpaces(inputCalle);
 })
-inputCasa.addEventListener('input',()=>{
+inputCasa.addEventListener('input', () => {
     onlyNumbersAndChar(inputCasa);
 })
 
@@ -207,19 +207,19 @@ const getDistrito = (codigo) => {
     $.ajax({
         type: "POST",
         url: "queryDistritos.php",
-                data: data,
-                success: (resp) => {
-                    let output = JSON.parse(resp)
-                    output.map(({codigo, distrito}) => {
-                        codigo = Number(codigo)
-                        codigo == 1302
-                        ? selectDistrito.innerHTML += `<option selected="selected" value="${codigo}">${distrito}</option>`
-                        : selectDistrito.innerHTML += `<option value="${codigo}">${distrito}</option>`
-                        ;
-                        getCorregimientos(selectDistrito.value)
-                    })
-                }
-    }) 
+        data: data,
+        success: (resp) => {
+            let output = JSON.parse(resp)
+            output.map(({ codigo, distrito }) => {
+                codigo = Number(codigo)
+                codigo == 1302
+                    ? selectDistrito.innerHTML += `<option selected="selected" value="${codigo}">${distrito}</option>`
+                    : selectDistrito.innerHTML += `<option value="${codigo}">${distrito}</option>`
+                    ;
+                getCorregimientos(selectDistrito.value)
+            })
+        }
+    })
 }
 
 const getCorregimientos = (codigo) => {
@@ -228,20 +228,20 @@ const getCorregimientos = (codigo) => {
     $.ajax({
         type: "POST",
         url: "queryCorregimientos.php",
-                data: data,
-                success: (resp) => {
-                    let output = JSON.parse(resp)
-                    selectCorregimiento.innerHTML = '';
-                    output.map(({codigo, corregimiento}) => {
-                        codigo = Number(codigo)
-                        if(codigo === 130208 ){
-                            selectCorregimiento.innerHTML += `<option selected="selected" value="${codigo}">${corregimiento}</option>`
-                        }else{
-                            selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`
-                        }
-                    })
+        data: data,
+        success: (resp) => {
+            let output = JSON.parse(resp)
+            selectCorregimiento.innerHTML = '';
+            output.map(({ codigo, corregimiento }) => {
+                codigo = Number(codigo)
+                if (codigo === 130208) {
+                    selectCorregimiento.innerHTML += `<option selected="selected" value="${codigo}">${corregimiento}</option>`
+                } else {
+                    selectCorregimiento.innerHTML += `<option value="${codigo}">${corregimiento}</option>`
                 }
-    }) 
+            })
+        }
+    })
 }
 
 /*
@@ -249,29 +249,29 @@ const getCorregimientos = (codigo) => {
 */
 
 const VerificarPais = (codigo) => {
-    if(codigo == 507){
+    if (codigo == 507) {
         $.ajax({
             type: "GET",
             url: "queryProvincias.php",
-                    success: (resp) => {
-                        let output = JSON.parse(resp)
-                        output.map(({codigo, provincia}) => {
-                            codigo = Number(codigo)
-                            
-                            if(codigo===13){
-                                selectProvincia.innerHTML += `<option selected="selected" value="${codigo}">${provincia}</option>`
-                                getDistrito(selectProvincia.value)
-                            }else{
-                                selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
-                            }
-                        })
+            success: (resp) => {
+                let output = JSON.parse(resp)
+                output.map(({ codigo, provincia }) => {
+                    codigo = Number(codigo)
+
+                    if (codigo === 13) {
+                        selectProvincia.innerHTML += `<option selected="selected" value="${codigo}">${provincia}</option>`
+                        getDistrito(selectProvincia.value)
+                    } else {
+                        selectProvincia.innerHTML += `<option value="${codigo}">${provincia}</option>`;
                     }
-        }) 
+                })
+            }
+        })
 
         selectProvincia.disabled = false;
         selectDistrito.disabled = false;
         selectCorregimiento.disabled = false;
-    }else{
+    } else {
         selectProvincia.disabled = true;
         selectDistrito.disabled = true;
         selectCorregimiento.disabled = true;
@@ -285,137 +285,152 @@ const llenarPaises = () => {
     $.ajax({
         type: "GET",
         url: "queryPaises.php",
-                success: (resp) => {
-                    let output = JSON.parse(resp)
-                    output.map(({codigo, pais}) => {
-                        if(codigo == 507){
-                            selectPaises.innerHTML += `<option selected="selected" value="${codigo}" >${pais}</option>`
-                            VerificarPais(selectPaises.value)
-                           
-                            
-                        }else{
-                            selectPaises.innerHTML += `<option value="${codigo}" >${pais}</option>`
-                        }
-                    })
+        success: (resp) => {
+            let output = JSON.parse(resp)
+            output.map(({ codigo, pais }) => {
+                if (codigo == 507) {
+                    selectPaises.innerHTML += `<option selected="selected" value="${codigo}" >${pais}</option>`
+                    VerificarPais(selectPaises.value)
+
+
+                } else {
+                    selectPaises.innerHTML += `<option value="${codigo}" >${pais}</option>`
                 }
-    }) 
+            })
+        }
+    })
 }
 
 llenarPaises()
 
-selectPaises.addEventListener('input', ()=> {
+selectPaises.addEventListener('input', () => {
     VerificarPais(selectPaises.value)
     selectProvincia.innerHTML = '';
     selectDistrito.innerHTML = '';
     selectCorregimiento.innerHTML = '';
 })
 
-selectProvincia.addEventListener('input', ()=> {
+selectProvincia.addEventListener('input', () => {
     getDistrito(selectProvincia.value)
 })
 
-selectDistrito.addEventListener('input', ()=> {
+selectDistrito.addEventListener('input', () => {
     getCorregimientos(selectDistrito.value)
 })
 
 const checkACasada = () => {
-    if(casadaSi.checked){
+    if (casadaSi.checked) {
         return '1'
     }
-    if(casadaNo.checked){
+    if (casadaNo.checked) {
         return '0'
     }
     return '0'
 }
 const checkGenero = () => {
-    if(generoF.checked){
+    if (generoF.checked) {
         return 'F'
     }
-    if(generoM.checked){
+    if (generoM.checked) {
         return 'M'
     }
 }
 
 const insertData = () => {
     let data = {
-            prefijo: selectPrefijo.value,
-            tomo: inputTomo.value,
-            asiento: inputAsiento.value,
-            cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`,
-            nombre1: inputNombre1.value,
-            nombre2: inputNombre2.value,
-            apellido1: inputApellido1.value,
-            apellido2: inputApellido2.value,
-            genero: checkGenero(),
-            estado_civil: scivil.value,
-            apellido_casada: inputACasada.value,
-            usa_apellido_casada: checkACasada(),
-            fecha_nacimiento: fechaNacimientoInput.value,
-            peso: inputPeso.value,
-            estatura: inputEstatura.value,
-            tipo_sangre:  selectTSangre.value,
-            c_medica: inputCMedica.value,
-            provincia: selectProvincia.value,
-            distrito: selectDistrito.value,
-            corregimiento: selectCorregimiento.value,
-            comunidad: inputComunidad.value,
-            calle: inputCalle.value,
-            casa: inputCasa.value,
-            estado: 1,
-            pais: selectPaises.value    
-        }
-        $.ajax({
-            type: "POST",
-            url: "insertDataForm.php",
-            data: data,
-            success: (resp) => {
-                console.log("Respuesta de insertDataForm.php:", resp);
-                mostrarPopup(resp);
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error("Error en la solicitud AJAX (insertDataForm.php):", textStatus, errorThrown);
-                mostrarPopup("Error al insertar datos");
-            },
-        });
-    };
-    
-    const mostrarPopup = (mensaje) => {
-        Swal.fire({
-            icon: 'info', // Puedes cambiarlo según el tipo de mensaje que desees mostrar
-            title: 'Mensaje',
-            text: mensaje,
-            confirmButtonText: 'Aceptar'
-        });
-    };
-
-const verifyPrimaryKey= () => {
-    let result;
-    let data = {
-        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`
+        prefijo: selectPrefijo.value,
+        tomo: inputTomo.value,
+        asiento: inputAsiento.value,
+        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`,
+        nombre1: inputNombre1.value,
+        nombre2: inputNombre2.value,
+        apellido1: inputApellido1.value,
+        apellido2: inputApellido2.value,
+        genero: checkGenero(),
+        estado_civil: scivil.value,
+        apellido_casada: inputACasada.value,
+        usa_apellido_casada: checkACasada(),
+        fecha_nacimiento: fechaNacimientoInput.value,
+        peso: inputPeso.value,
+        estatura: inputEstatura.value,
+        tipo_sangre: selectTSangre.value,
+        c_medica: inputCMedica.value,
+        provincia: selectProvincia.value,
+        distrito: selectDistrito.value,
+        corregimiento: selectCorregimiento.value,
+        comunidad: inputComunidad.value,
+        calle: inputCalle.value,
+        casa: inputCasa.value,
+        estado: 1,
+        pais: selectPaises.value
     }
     $.ajax({
         type: "POST",
-        url: "queryCedula.php",
+        url: "insertDataForm.php",
         data: data,
         success: (resp) => {
-           let output = JSON.parse(resp);
-           if(output){
+            console.log("Respuesta de insertDataForm.php:", resp);
+            mostrarPopup(resp);
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            console.error("Error en la solicitud AJAX (insertDataForm.php):", textStatus, errorThrown);
+            mostrarPopup("Error al insertar datos");
+        },
+    });
+};
+
+const mostrarPopup = (mensaje) => {
+    Swal.fire({
+        icon: 'info', // Puedes cambiarlo según el tipo de mensaje que desees mostrar 'warning', 'success', 'error', etc.
+        title: 'Mensaje',
+        text: mensaje,
+        confirmButtonText: 'Aceptar'
+    });
+};
+
+const verifyPrimaryKey = () => {
+    let cedula = `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`;
+
+    // Validar campos requeridos
+    if (!cedula) {
+        mostrarPopup('Por favor, completa todos los campos.');
+        return;
+    }
+
+    let data = {
+        cedula: cedula
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: 'queryCedula.php',
+        data: data,
+        success: (resp) => {
+            let output = JSON.parse(resp);
+            if (output) {
                 insertData();
-           }else{
-            console.log("Datos ya registrados")
-           }
+            } else {
+                mostrarPopup('Datos ya registrados');
+            }
+        },
+        error: (error) => {
+            console.error('Error en la solicitud AJAX:', error);
         }
-    })
-    return result;
-}
+    });
+};
 
 btn_Submit.addEventListener('click', () => {
     const form = $('#form_sender');
-    form.submit((e) => {
-        e.preventDefault();
-    });
-    verifyPrimaryKey();
-})
+    // Valida los campos requeridos antes de llamar a verifyPrimaryKey
+    if (form[0].checkValidity()) {
+        form.submit((e) => {
+            e.preventDefault();
+            verifyPrimaryKey();
+        });
+    } else {
+        mostrarPopup('Por favor, completa todos los campos.');
+    }
+});
 /* 
     * Funcion para llenar los datos de los inputs luego de recibir la data
     @Param data:JSON
@@ -425,19 +440,19 @@ const fillData = (data) => {
         TODO: verificar apellido casada (radio button)
     */
 
-    if(data.genero == 'M'){
+    if (data.genero == 'M') {
         generoM.checked = true
         casadaNo.disabled = true;
         casadaSi.disabled = true;
     }
-    if(data.genero == 'F'){
+    if (data.genero == 'F') {
         generoF.checked = true
         casadaNo.disabled = false;
         casadaSi.disabled = false;
-        if(data.usa_apellido_casada == 0){
+        if (data.usa_apellido_casada == 0) {
             casadaNo.checked = true
         }
-        if(data.usa_apellido_casada == 1){
+        if (data.usa_apellido_casada == 1) {
             casadaSi.checked = true;
         }
     }
@@ -456,7 +471,7 @@ const fillData = (data) => {
     selectPaises.value = data.pais
     inputComunidad.value = data.comunidad
     inputCalle.value = data.calle
-    inputCasa.value = data.casa          
+    inputCasa.value = data.casa
     scivil.value = data.estado_civil
     selectTSangre.value = data.tipo_de_sangre
 
@@ -473,9 +488,9 @@ const getGenerales = () => {
         url: "queryDataGenerales.php",
         data: data,
         success: (resp) => {
-           let output = JSON.parse(resp);
-           fillData(output[0])
-           console.log(output)
+            let output = JSON.parse(resp);
+            fillData(output[0])
+            console.log(output)
         }
     })
 }
@@ -498,12 +513,12 @@ const createButton = (state) => {
     const button = document.createElement("button");
     button.classList.add("buttonSender")
     button.id = "searchBtn"
-    button.textContent="Buscar";
+    button.textContent = "Buscar";
     button.type = "submit";
-    if(state == 1){
+    if (state == 1) {
         wrapperCedula.appendChild(button);
         let btn = document.getElementById("searchBtn")
-        btn.addEventListener("click", ()=> {
+        btn.addEventListener("click", () => {
             const form = $('#form_sender');
             form.submit((e) => {
                 e.preventDefault();
@@ -511,7 +526,7 @@ const createButton = (state) => {
             getGenerales();
             stateInputs(true);
         })
-    }else{
+    } else {
         let btn = document.getElementById("searchBtn")
         wrapperCedula.removeChild(btn);
     }
@@ -531,19 +546,19 @@ const disableRequiredInput = (state) => {
 */
 
 const handleBtnState = (state) => {
-let hState = state;
-if(hState == 1 ){
-    disableRequiredInput(false)
-    createButton(state);
-    $('#form_sender').trigger("reset");
-}
-if(hState == 0){
-    disableRequiredInput(false);
-    stateInputs(false);
-    createButton(state);
-    $('#form_sender').trigger("reset");
-}
-return hState
+    let hState = state;
+    if (hState == 1) {
+        disableRequiredInput(false)
+        createButton(state);
+        $('#form_sender').trigger("reset");
+    }
+    if (hState == 0) {
+        disableRequiredInput(false);
+        stateInputs(false);
+        createButton(state);
+        $('#form_sender').trigger("reset");
+    }
+    return hState
 }
 
 buttonsSenders.forEach((item, index) => {

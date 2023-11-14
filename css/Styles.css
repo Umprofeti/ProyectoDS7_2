@@ -127,6 +127,23 @@ input[type="radio"]{
     box-shadow: none;
 }
 
+/* Esto maneja el estilo de fuente del popup de sweetalert*/
+.swal2-popup {
+    font-family: 'Lato', sans-serif !important;
+    font-weight: bold;
+}
+
+
+.swal2-title {
+    font-family: 'Lato', sans-serif !important;
+    font-weight: bold;
+}
+
+.swal2-text {
+    font-family: 'Lato', sans-serif !important;
+    font-weight: normal;
+}
+
 
 /* Animaciones */
 @-webkit-keyframes Animation {
