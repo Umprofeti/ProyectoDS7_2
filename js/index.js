@@ -419,27 +419,12 @@ const verifyPrimaryKey = () => {
     });
 };
 
-btn_Submit.addEventListener('click', () => {
-    const form = $('#form_sender');
-    // Valida los campos requeridos antes de llamar a verifyPrimaryKey
-    if (form[0].checkValidity()) {
-        form.submit((e) => {
-            e.preventDefault();
-            verifyPrimaryKey();
-        });
-    } else {
-        mostrarPopup('Por favor, completa todos los campos.');
-    }
-});
+
 /* 
     * Funcion para llenar los datos de los inputs luego de recibir la data
     @Param data:JSON
 */
 const fillData = (data) => {
-    /* 
-        TODO: verificar apellido casada (radio button)
-    */
-
     if (data.genero == 'M') {
         generoM.checked = true
         casadaNo.disabled = true;
@@ -489,8 +474,11 @@ const getGenerales = () => {
         data: data,
         success: (resp) => {
             let output = JSON.parse(resp);
-            fillData(output[0])
-            console.log(output)
+            if(output[0] == undefined){
+                mostrarPopup("No se han encontrados datos del usuario, porfavor registrelo")
+            }else{
+                fillData(output[0])
+            }
         }
     })
 }
@@ -510,24 +498,26 @@ const stateInputs = (state) => {
 */
 
 const createButton = (state) => {
-    const button = document.createElement("button");
-    button.classList.add("buttonSender")
-    button.id = "searchBtn"
-    button.textContent = "Buscar";
-    button.type = "submit";
-    if (state == 1) {
-        wrapperCedula.appendChild(button);
-        let btn = document.getElementById("searchBtn")
-        btn.addEventListener("click", () => {
-            const form = $('#form_sender');
-            form.submit((e) => {
-                e.preventDefault();
-            });
-            getGenerales();
-            stateInputs(true);
-        })
-    } else {
-        let btn = document.getElementById("searchBtn")
+    let btn = document.getElementById("searchBtn")
+    if(btn == null && state == 1){
+        const button = document.createElement("button");
+        button.classList.add("buttonSender")
+        button.id = "searchBtn"
+        button.textContent = "Buscar";
+        button.type = "submit";
+        if (state == 1) {
+            button.addEventListener("click", () => {
+                const form = $('#form_sender');
+                form.submit((e) => {
+                    e.preventDefault();
+                });
+                getGenerales();
+                stateInputs(true);
+            })
+            wrapperCedula.appendChild(button);
+        }
+    }
+    if(state == 0 && btn != null){
         wrapperCedula.removeChild(btn);
     }
 }
@@ -538,6 +528,51 @@ const disableRequiredInput = (state) => {
     fechaNacimientoInput.required = state;
     inputEstatura.required = state;
     inputPeso.required = state;
+}
+
+
+/* 
+    * Funcion para hacer el update a la tabla generales con la info que el usuario nueva
+*/
+
+const updateGenerales = () => {
+    let data = {
+        cedula: `${selectPrefijo.value}-${inputTomo.value}-${inputAsiento.value}`,
+        nombre1: inputNombre1.value,
+        nombre2: inputNombre2.value,
+        apellido1: inputApellido1.value,
+        apellido2: inputApellido2.value,
+        genero: checkGenero(),
+        estado_civil: scivil.value,
+        apellido_casada: inputACasada.value,
+        usa_apellido_casada: checkACasada(),
+        fecha_nacimiento: fechaNacimientoInput.value,
+        peso: inputPeso.value,
+        estatura: inputEstatura.value,
+        tipo_sangre: selectTSangre.value,
+        c_medica: inputCMedica.value,
+        provincia: selectProvincia.value,
+        distrito: selectDistrito.value,
+        corregimiento: selectCorregimiento.value,
+        comunidad: inputComunidad.value,
+        calle: inputCalle.value,
+        casa: inputCasa.value,
+        estado: 1,
+        pais: selectPaises.value
+    }
+    $.ajax({
+        type: "POST",
+        url: "updateGenerales.php",
+        data: data,
+        success: (resp) => {
+            console.log("Respuesta de updateGenerales.php:", resp);
+            mostrarPopup(resp);
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            console.error("Error en la solicitud AJAX (insertDataForm.php):", textStatus, errorThrown);
+            mostrarPopup("Error al actualizar datos");
+        },
+    });
 }
 
 /* 
@@ -551,12 +586,42 @@ const handleBtnState = (state) => {
         disableRequiredInput(false)
         createButton(state);
         $('#form_sender').trigger("reset");
+        btn_Submit.removeEventListener('click', () => {
+            const form = $('#form_sender');
+            // Valida los campos requeridos antes de llamar a verifyPrimaryKey
+            if (form[0].checkValidity()) {
+                form.submit((e) => {
+                    e.preventDefault();
+                    verifyPrimaryKey();
+                });
+            } else {
+                mostrarPopup('Por favor, completa todos los campos.');
+            }
+        })
+        btn_Submit.addEventListener('click', () => {
+            updateGenerales()
+        })
     }
     if (hState == 0) {
         disableRequiredInput(false);
         stateInputs(false);
         createButton(state);
         $('#form_sender').trigger("reset");
+        btn_Submit.removeEventListener('click', () => {
+            updateGenerales()
+        })
+        btn_Submit.addEventListener('click', () => {
+            const form = $('#form_sender');
+            // Valida los campos requeridos antes de llamar a verifyPrimaryKey
+            if (form[0].checkValidity()) {
+                form.submit((e) => {
+                    e.preventDefault();
+                    verifyPrimaryKey();
+                });
+            } else {
+                mostrarPopup('Por favor, completa todos los campos.');
+            }
+        });
     }
     return hState
 }
