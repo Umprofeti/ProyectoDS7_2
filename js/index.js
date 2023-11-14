@@ -590,7 +590,7 @@ const showForm = (state) => {
         if(form_cheque == null){
             const createForm = document.createElement("iframe")
             createForm.id = "form_cheque"
-            createForm.src = "http://localhost/DS7/ProyectoDS7_2/cheque_assets/ProyectoD7_1/cheque_body.html"
+            createForm.src = "./cheque_assets/ProyectoD7_1/cheque_body.html"
             createForm.title = "Formulario Cheque"
             createForm.width = "900px"
             createForm.height = "650px"
