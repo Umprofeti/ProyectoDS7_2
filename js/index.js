@@ -302,7 +302,9 @@ const llenarPaises = () => {
 }
 
 llenarPaises()
-
+$('#form_sender').submit((e) => {
+    return false;
+});
 selectPaises.addEventListener('input', () => {
     VerificarPais(selectPaises.value)
     selectProvincia.innerHTML = '';
@@ -567,6 +569,7 @@ const updateGenerales = () => {
         success: (resp) => {
             console.log("Respuesta de updateGenerales.php:", resp);
             mostrarPopup(resp);
+            $('#form_sender').trigger("reset");
         },
         error: (jqXHR, textStatus, errorThrown) => {
             console.error("Error en la solicitud AJAX (insertDataForm.php):", textStatus, errorThrown);
@@ -629,13 +632,10 @@ const handleBtnState = (state) => {
         createButton(state);
         $('#form_sender').trigger("reset");
         btn_Submit.removeEventListener('click', () => {
-            const form = $('#form_sender');
             // Valida los campos requeridos antes de llamar a verifyPrimaryKey
-            if (form[0].checkValidity()) {
-                form.submit((e) => {
-                    e.preventDefault();
-                    verifyPrimaryKey();
-                });
+            const form = document.getElementById("form_sender")
+            if (form.checkValidity()) {
+                verifyPrimaryKey();
             } else {
                 mostrarPopup('Por favor, completa todos los campos.');
             }
@@ -654,13 +654,9 @@ const handleBtnState = (state) => {
             updateGenerales()
         })
         btn_Submit.addEventListener('click', () => {
-            const form = $('#form_sender');
-            // Valida los campos requeridos antes de llamar a verifyPrimaryKey
-            if (form[0].checkValidity()) {
-                form.submit((e) => {
-                    e.preventDefault();
-                    verifyPrimaryKey();
-                });
+            const form = document.getElementById("form_sender")
+            if (form.checkValidity()) {
+                verifyPrimaryKey();
             } else {
                 mostrarPopup('Por favor, completa todos los campos.');
             }
@@ -671,6 +667,8 @@ const handleBtnState = (state) => {
 
 buttonsSenders.forEach((item, index) => {
     item.addEventListener('click', () => {
-        handleBtnState(index)
+       let data =  handleBtnState(index)
+       console.log(data)
     })
 })
+handleBtnState(0)
