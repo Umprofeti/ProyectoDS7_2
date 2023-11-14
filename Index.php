@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <main>
+    <main id="add_form">
         <div class="optionsSenders">
             <button class="buttonSender">Crear</button>
             <button class="buttonSender">Actualizar</button>

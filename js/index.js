@@ -576,13 +576,55 @@ const updateGenerales = () => {
 }
 
 /* 
+    * Funcion para ocultar o mostrar el formulario de acuerdo al botón seleccionado
+*/
+
+const showForm = (state) => {
+    let form = document.getElementById("form_sender")
+    const mainCheque = document.getElementById("add_form");
+    if(state == 2){
+        form.style.display = 'none';
+        /* Aquí se agrega el nuevo form */
+
+        let form_cheque = document.getElementById("form_cheque");
+        if(form_cheque == null){
+            const createForm = document.createElement("iframe")
+            createForm.id = "form_cheque"
+            createForm.src = "http://localhost/DS7/ProyectoDS7_2/cheque_assets/ProyectoD7_1/cheque_body.html"
+            createForm.title = "Formulario Cheque"
+            createForm.width = "900px"
+            createForm.height = "650px"
+            createForm.style.border = "none"
+            mainCheque.appendChild(createForm)
+        }
+    }
+    if(state == 0 || state == 1 || state == 3){
+        let form_cheque = document.getElementById("form_cheque");
+        if(form_cheque != null){
+            mainCheque.removeChild(form_cheque)
+        }
+        /* Se vuelve a mostrar el form */
+        form.style.display = 'block';
+    }
+}
+
+/* 
 * Funcion para establecer un estado en los botones
 @Param state: int
 */
 
 const handleBtnState = (state) => {
     let hState = state;
+    if(hState == 3){
+        showForm(state)
+        let form = document.getElementById("form_sender")
+        form.style.display = 'none';
+    }
+    if(hState == 2){
+        showForm(state)
+    }
     if (hState == 1) {
+        showForm(state)
         disableRequiredInput(false)
         createButton(state);
         $('#form_sender').trigger("reset");
@@ -603,6 +645,7 @@ const handleBtnState = (state) => {
         })
     }
     if (hState == 0) {
+        showForm(state)
         disableRequiredInput(false);
         stateInputs(false);
         createButton(state);
