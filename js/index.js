@@ -569,7 +569,6 @@ const updateGenerales = () => {
         success: (resp) => {
             console.log("Respuesta de updateGenerales.php:", resp);
             mostrarPopup(resp);
-            $('#form_sender').trigger("reset");
         },
         error: (jqXHR, textStatus, errorThrown) => {
             console.error("Error en la solicitud AJAX (insertDataForm.php):", textStatus, errorThrown);
@@ -629,6 +628,20 @@ const showForm = (state) => {
 @Param state: int
 */
 
+const eventCreate = () => {
+    if (verifyInputs()) {
+        verifyPrimaryKey();
+    } else {
+        mostrarPopup('Por favor, completa todos los campos.');
+    }
+}
+const eventUpdate = () => {
+    if(verifyInputs()){
+        updateGenerales()
+    }else{
+        mostrarPopup('Por favor, completa todos los campos.');
+    }
+}
 const handleBtnState = (state) => {
     let hState = state;
     if(hState == 3){
@@ -643,43 +656,16 @@ const handleBtnState = (state) => {
         showForm(state)
         disableRequiredInput(false)
         createButton(state);
-        $('#form_sender').trigger("reset");
-        btn_Submit.removeEventListener('click', () => {
-            // Valida los campos requeridos antes de llamar a verifyPrimaryKey
-            if (verifyInputs()) {
-                verifyPrimaryKey();
-            } else {
-                mostrarPopup('Por favor, completa todos los campos.');
-            }
-        })
-        btn_Submit.addEventListener('click', () => {
-            if(verifyInputs()){
-                updateGenerales()
-            }else{
-                mostrarPopup('Por favor, completa todos los campos.');
-            }
-        })
+        btn_Submit.addEventListener('click', eventUpdate)
+        btn_Submit.removeEventListener('click', eventCreate);
     }
     if (hState == 0) {
         showForm(state)
         disableRequiredInput(false);
         stateInputs(false);
         createButton(state);
-        $('#form_sender').trigger("reset");
-        btn_Submit.removeEventListener('click', () => {
-            if(verifyInputs()){
-                updateGenerales()
-            }else{
-                mostrarPopup('Por favor, completa todos los campos.');
-            }
-        })
-        btn_Submit.addEventListener('click', () => {
-            if (verifyInputs()) {
-                verifyPrimaryKey();
-            } else {
-                mostrarPopup('Por favor, completa todos los campos.');
-            }
-        });
+        btn_Submit.addEventListener('click', eventCreate);
+        btn_Submit.removeEventListener('click', eventUpdate);
     }
     return hState
 }
