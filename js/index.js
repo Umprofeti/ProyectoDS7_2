@@ -653,7 +653,11 @@ const handleBtnState = (state) => {
             }
         })
         btn_Submit.addEventListener('click', () => {
-            updateGenerales()
+            if(verifyInputs()){
+                updateGenerales()
+            }else{
+                mostrarPopup('Por favor, completa todos los campos.');
+            }
         })
     }
     if (hState == 0) {
@@ -663,7 +667,11 @@ const handleBtnState = (state) => {
         createButton(state);
         $('#form_sender').trigger("reset");
         btn_Submit.removeEventListener('click', () => {
-            updateGenerales()
+            if(verifyInputs()){
+                updateGenerales()
+            }else{
+                mostrarPopup('Por favor, completa todos los campos.');
+            }
         })
         btn_Submit.addEventListener('click', () => {
             if (verifyInputs()) {
