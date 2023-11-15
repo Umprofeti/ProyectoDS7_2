@@ -337,7 +337,7 @@ const checkGenero = () => {
         return 'M'
     }
     if (!generoF.checked && !generoM.checked){
-        generoM.checked
+        generoM.checked = true
         return 'M'
     }
 }
@@ -621,7 +621,7 @@ const showForm = (state) => {
     const verifyInputs = () => {
         const form = document.getElementById("form_sender");
         if(form[0].checkValidity() && form[1].checkValidity() && form[2].checkValidity()){
-            if(inputNombre1.value != "" && inputApellido1 != ""){
+            if(inputNombre1.value != "" && inputApellido1 != "" && fechaNacimientoInput.value != "" && inputPeso != "" && inputEstatura != "" && inputComunidad != "" && inputCalle != "" && inputCasa != ""){
                 return true
             }
         }else{
