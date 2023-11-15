@@ -612,6 +612,19 @@ const showForm = (state) => {
 }
 
 /* 
+    * Funcion para verificar los campos del formulario estén llenos, los requeridos por la base de datos
+*/
+
+    const verifyInputs = () => {
+        const form = document.getElementById("form_sender");
+        if(form[0].checkValidity() && form[1].checkValidity() && form[2].checkValidity() && form[3].checkValidity()){
+            return true
+        }else{
+            return false
+        }
+    }
+
+/* 
 * Funcion para establecer un estado en los botones
 @Param state: int
 */
@@ -633,8 +646,7 @@ const handleBtnState = (state) => {
         $('#form_sender').trigger("reset");
         btn_Submit.removeEventListener('click', () => {
             // Valida los campos requeridos antes de llamar a verifyPrimaryKey
-            const form = document.getElementById("form_sender")
-            if (form.checkValidity()) {
+            if (verifyInputs()) {
                 verifyPrimaryKey();
             } else {
                 mostrarPopup('Por favor, completa todos los campos.');
@@ -654,8 +666,7 @@ const handleBtnState = (state) => {
             updateGenerales()
         })
         btn_Submit.addEventListener('click', () => {
-            const form = document.getElementById("form_sender")
-            if (form.checkValidity()) {
+            if (verifyInputs()) {
                 verifyPrimaryKey();
             } else {
                 mostrarPopup('Por favor, completa todos los campos.');
