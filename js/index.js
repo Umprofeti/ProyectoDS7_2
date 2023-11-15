@@ -336,6 +336,10 @@ const checkGenero = () => {
     if (generoM.checked) {
         return 'M'
     }
+    if (!generoF.checked && !generoM.checked){
+        generoM.checked
+        return 'M'
+    }
 }
 
 const insertData = () => {
@@ -616,8 +620,10 @@ const showForm = (state) => {
 
     const verifyInputs = () => {
         const form = document.getElementById("form_sender");
-        if(form[0].checkValidity() && form[1].checkValidity() && form[2].checkValidity() && form[3].checkValidity()){
-            return true
+        if(form[0].checkValidity() && form[1].checkValidity() && form[2].checkValidity()){
+            if(inputNombre1.value != "" && inputApellido1 != ""){
+                return true
+            }
         }else{
             return false
         }
